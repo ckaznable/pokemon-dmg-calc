@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+}
+
+.status-input-wrap {
+  @apply flex flex-row gap-2 items-center
+}
+
+input {
+  @apply border-gray-400 rounded-sm border-2 p-1 text-sm
+}

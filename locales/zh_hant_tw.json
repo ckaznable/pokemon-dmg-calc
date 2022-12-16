@@ -1,0 +1,20 @@
+{
+  "type_bug": "蟲",
+  "type_dark": "惡",
+  "type_dragon": "龍",
+  "type_electric": "電",
+  "type_fairy": "妖精",
+  "type_fighting": "格鬥",
+  "type_fire": "火",
+  "type_flying": "飛行",
+  "type_ghost": "幽靈",
+  "type_grass": "草",
+  "type_ground": "地面",
+  "type_ice": "冰",
+  "type_normal": "一般",
+  "type_poison": "毒",
+  "type_psychic": "超能力",
+  "type_rock": "岩石",
+  "type_steel": "鋼",
+  "type_water": "水"
+}

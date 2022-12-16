@@ -1,0 +1,20 @@
+{
+  "type_bug": "Bug",
+  "type_dark": "Dark",
+  "type_dragon": "Dragon",
+  "type_electric": "Electric",
+  "type_fairy": "Fairy",
+  "type_fighting": "Fighting",
+  "type_fire": "Fire",
+  "type_flying": "Flying",
+  "type_ghost": "Ghost",
+  "type_grass": "Grass",
+  "type_ground": "Ground",
+  "type_ice": "Ice",
+  "type_normal": "Normal",
+  "type_poison": "Poison",
+  "type_psychic": "Psychic",
+  "type_rock": "Rock",
+  "type_steel": "Steel",
+  "type_water": "Water"
+}
