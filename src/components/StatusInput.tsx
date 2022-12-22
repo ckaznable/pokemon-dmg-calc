@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react"
-import { isValidNumberString } from "../util"
+import React, { CSSProperties, useEffect, useState } from "react"
+import { calcHpStatus, calcStatus, isValidNumberString } from "../util"
+
+export interface StatusInputDefault {
+  bp: number
+  iv: number
+  ss: number
+}
 
 interface Props {
   title: string
@@ -7,22 +13,16 @@ interface Props {
   isDeBuff?: boolean
   hp?: boolean
   level: number
-  onChange?: (s: number) => void
+  value?: StatusInputDefault
+  onChangeSS?: (s: number) => void
   onChangeBP?: (s: number) => void
-}
-
-function calcStatus(ss: number, iv: number, level: number, bp: number, buffRate: number) {
-  return Math.round((((ss * 2) + iv + (bp / 4)) * level) / 100 + 5 * buffRate)
-}
-
-function calcHpStatus(ss: number, iv: number, level: number, bp: number) {
-  return Math.round((((ss * 2) + iv + (bp / 4)) * level) / 100 + 10 + level)
+  onChangeIV?: (s: number) => void
 }
 
 function StatusInput(props: Props) {
-  const [bp, setBP] = useState(0)
-  const [iv, setIV] = useState(31)
-  const [ss, setSS] = useState(0)
+  const [bp, setBP] = useState(props.value ? props.value.bp : 0)
+  const [iv, setIV] = useState(props.value ? props.value.iv : 31)
+  const [ss, setSS] = useState(props.value ? props.value.ss : 0)
 
   const buffRate = props.isBuff ? 1.1 :
     props.isDeBuff ? 0.9 : 1
@@ -32,12 +32,16 @@ function StatusInput(props: Props) {
     : calcStatus(ss, iv, props.level, bp, buffRate)
 
   useEffect(() => {
-    props.onChange?.(status)
-  }, [status])
+    props.onChangeSS?.(ss)
+  }, [ss])
 
   useEffect(() => {
     props.onChangeBP?.(bp)
   }, [bp])
+
+  useEffect(() => {
+    props.onChangeIV?.(iv)
+  }, [iv])
 
   const onInputChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!isValidNumberString(e.target.value)) {
@@ -48,12 +52,16 @@ function StatusInput(props: Props) {
     setter(+e.target.value)
   }
 
+  const inputStyle: CSSProperties = {
+    maxWidth: `50px`
+  }
+
   return (
     <div className="status-input-wrap">
       <span className="w-1/6">{ props.title }</span>
-      <input min="0" type="number" onChange={onInputChange(setSS)} value={ss} />
-      <input min="0" type="number" onChange={onInputChange(setIV)} value={iv} />
-      <input min="0" type="number" onChange={onInputChange(setBP)} value={bp} />
+      <input min="0" style={inputStyle} type="number" onChange={onInputChange(setSS)} value={ss} />
+      <input min="0" style={inputStyle} type="number" onChange={onInputChange(setIV)} value={iv} />
+      <input min="0" style={inputStyle} type="number" onChange={onInputChange(setBP)} value={bp} />
       <span className="text-green-400 w-[30px] min-w-[30px] text-center">{ status }</span>
     </div>
   )

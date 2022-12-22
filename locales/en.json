@@ -16,5 +16,16 @@
   "type_psychic": "Psychic",
   "type_rock": "Rock",
   "type_steel": "Steel",
-  "type_water": "Water"
+  "type_water": "Water",
+
+  "app_name": "Simple Pokemon Damage Calculator",
+
+  "title_attacker": "Attacker",
+  "title_defender": "Defender",
+  "title_move": "Move",
+
+  "move_physical": "Physical",
+  "move_special": "Special",
+
+  "placeholder_power": "Power"
 }

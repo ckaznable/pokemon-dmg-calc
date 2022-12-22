@@ -16,5 +16,16 @@
   "type_psychic": "超能力",
   "type_rock": "岩石",
   "type_steel": "鋼",
-  "type_water": "水"
+  "type_water": "水",
+
+  "app_name": "超陽春寶可夢傷害計算機",
+
+  "title_attacker": "攻擊方",
+  "title_defender": "防守方",
+  "title_move": "招式",
+
+  "move_physical": "物理",
+  "move_special": "特殊",
+
+  "placeholder_power": "威力"
 }

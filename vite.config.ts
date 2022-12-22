@@ -13,6 +13,10 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    VitePWA(),
+    VitePWA({
+      devOptions: {
+        enabled: true
+      }
+    }),
   ],
 })

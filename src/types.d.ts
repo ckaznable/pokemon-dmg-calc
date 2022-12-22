@@ -7,6 +7,17 @@ export type Status = {
   S: number
 }
 
+export interface AllStatus {
+  types: PokemonTypes
+  lv: number
+  ss: Status
+  iv: Status
+  bp: Status
+}
+
+export type TYPE_NONE = -1
+export type PokemonTypes = [PokemonType, PokemonType | TYPE_NONE]
+
 export enum PokemonType {
   Normal,
   Fire,
@@ -27,4 +38,9 @@ export enum PokemonType {
   Steel,
   Fairy,
   Unknown
+}
+
+export enum MoveType {
+  Physical,
+  Special
 }

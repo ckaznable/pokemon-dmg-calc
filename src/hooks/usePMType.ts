@@ -1,4 +1,4 @@
-import { PokemonType } from "@/types"
+import { PokemonType } from "@/types.d"
 import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -43,8 +43,8 @@ export default function usePMType() {
 
     const list = [] as PMTypeItem[]
     for (const item in PokemonType) {
-      if (isNaN(Number(item))) {
-        const _t = item as unknown as PokemonType
+      if (!isNaN(Number(item))) {
+        const _t = +item as unknown as PokemonType
         list.push({
           type: _t,
           name: getTypeName(_t)
