@@ -53,7 +53,7 @@ function StatusInput(props: Props) {
   }
 
   const inputStyle: CSSProperties = {
-    maxWidth: `50px`
+    maxWidth: `60px`
   }
 
   return (

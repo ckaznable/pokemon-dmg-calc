@@ -20,7 +20,7 @@ function TypeSelect(props: Props) {
   }
 
   return <select onChange={onChange} value={props.value}>
-    {"default" in props ? <option value={props.default?.type}>{ props.default?.name || "" }</option> : <></>}
+    {"default" in props && props.default ? <option value={props.default?.type}>{ props.default?.name || "" }</option> : <></>}
     {getTypeList().map(obj => (<option key={obj.type} value={obj.type}>{ obj.name }</option>))}
   </select>
 }

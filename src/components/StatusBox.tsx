@@ -78,7 +78,7 @@ function StatusBox(props: Props) {
           <TypeSelect value={props.status.types[1]} onChange={onChangeType(1)} default={defaultType} />
         </div>
 
-        {statusKeyList.map(k => <StatusInput key={k} hp={k == "H"} title="H:" value={getInputDef(k)} onChangeSS={onChangeSS(k)} onChangeIV={onChangeIV(k)} onChangeBP={onChangeBP(k)} level={props.status.lv} />)}
+        {statusKeyList.map(k => <StatusInput key={k} hp={k == "H"} title={`${k}:`} value={getInputDef(k)} onChangeSS={onChangeSS(k)} onChangeIV={onChangeIV(k)} onChangeBP={onChangeBP(k)} level={props.status.lv} />)}
         <div className="mt-4 text-red-500">{remain}</div>
       </div>
     </fieldset>

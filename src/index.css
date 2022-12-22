@@ -8,10 +8,26 @@
   }
 }
 
+body {
+  background: #121212;
+}
+
+fieldset {
+  @apply bg-white bg-opacity-10 text-white
+}
+
 .status-input-wrap {
   @apply flex flex-row gap-2 items-center
 }
 
 input {
-  @apply border-gray-400 rounded-sm border-2 p-1 text-sm
+  @apply border-gray-400 rounded-sm border-2 p-1 text-sm text-white bg-opacity-10 bg-white
+}
+
+select {
+  @apply text-white bg-opacity-10 bg-white
+}
+
+option {
+  @apply text-white bg-[#121212] bg-opacity-80
 }
