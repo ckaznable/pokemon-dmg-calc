@@ -27,17 +27,19 @@ export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveS
     : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, 1)
 
   const def = move.moveType === MoveType.Physical
-    ? calcStatus(attacker.ss.B, attacker.iv.B, attacker.lv, attacker.bp.B, 1)
-    : calcStatus(attacker.ss.D, attacker.iv.D, attacker.lv, attacker.bp.D, 1)
+    ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, 1)
+    : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, 1)
 
   const base = (((((attacker.lv * 2 + 10) / 250) + atk / def) * move.power + 2) * attacker.lv) / 100
   let typeBuffRate = attacker.types.includes(move.type) ? 1.5 : 1
-  let typeRate = getDamageRate(move.type, defender.types[0])
-  if(defender.types[1] !== -1) {
-    typeRate *= getDamageRate(move.type, defender.types[1])
+  let typeRate = getDamageRate(+move.type, +defender.types[0])
+
+  if (defender.types[1] !== -1 && defender.types[0] !== defender.types[1]) {
+    typeRate *= getDamageRate(+move.type, +defender.types[1])
   }
 
-  return Math.round(base * typeBuffRate * typeRate)
+  const dmg = Math.round(base * typeBuffRate * typeRate)
+  return Math.round((dmg / calcHpStatus(defender.ss.H, defender.iv.H, defender.lv, defender.bp.H)) * 100)
 }
 
 function getDamageRate(atk: PokemonType, def: PokemonType) {
@@ -56,8 +58,8 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Psychic:
         case PokemonType.Grass:
           return 2
+        default: return 1
       }
-
     case PokemonType.Dark:
       switch (def) {
         case PokemonType.Fighting:
@@ -67,6 +69,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Ghost:
         case PokemonType.Psychic:
           return 2
+        default: return 1
       }
 
     case PokemonType.Dragon:
@@ -75,6 +78,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
           return 2
         case PokemonType.Fairy:
           return 0
+        default: return 1
       }
 
     case PokemonType.Electric:
@@ -88,6 +92,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Water:
         case PokemonType.Flying:
           return 2
+        default: return 1
       }
 
     case PokemonType.Fairy:
@@ -100,6 +105,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Dark:
         case PokemonType.Fighting:
           return 2
+        default: return 1
       }
 
     case PokemonType.Fighting:
@@ -117,6 +123,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Steel:
         case PokemonType.Dark:
           return 2
+        default: return 1
       }
 
     case PokemonType.Fire:
@@ -130,6 +137,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Ice:
         case PokemonType.Grass:
           return 2
+        default: return 1
       }
 
     case PokemonType.Flying:
@@ -141,6 +149,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Fighting:
         case PokemonType.Grass:
           return 2
+        default: return 1
       }
 
     case PokemonType.Ghost:
@@ -152,6 +161,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Psychic:
         case PokemonType.Ghost:
           return 2
+        default: return 1
       }
 
     case PokemonType.Grass:
@@ -167,6 +177,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Rock:
         case PokemonType.Ground:
           return 2
+        default: return 1
       }
 
     case PokemonType.Ground:
@@ -182,6 +193,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Steel:
         case PokemonType.Fire:
           return 2
+        default: return 1
       }
 
     case PokemonType.Ice:
@@ -196,6 +208,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Dragon:
         case PokemonType.Flying:
           return 2
+        default: return 1
       }
 
     case PokemonType.Normal:
@@ -206,6 +219,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Rock:
         case PokemonType.Steel:
           return 0.5
+        default: return 1
       }
 
     case PokemonType.Poison:
@@ -220,6 +234,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Grass:
         case PokemonType.Fairy:
           return 2
+        default: return 1
       }
 
     case PokemonType.Psychic:
@@ -232,6 +247,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Poison:
         case PokemonType.Fighting:
           return 2
+        default: return 1
       }
 
     case PokemonType.Rock:
@@ -245,6 +261,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Fire:
         case PokemonType.Bug:
           return 2
+        default: return 1
       }
 
     case PokemonType.Steel:
@@ -258,6 +275,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Ice:
         case PokemonType.Rock:
           return 2
+        default: return 1
       }
 
     case PokemonType.Water:
@@ -270,6 +288,7 @@ function getDamageRate(atk: PokemonType, def: PokemonType) {
         case PokemonType.Fire:
         case PokemonType.Ground:
           return 2
+        default: return 1
       }
   }
 
