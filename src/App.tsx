@@ -49,9 +49,9 @@ function App() {
             nature: pms.setDefenderNature,
           }}
         />
-      </div>
 
-      <MoveBox />
+        <MoveBox />
+      </div>
     </div>
   </>)
 }

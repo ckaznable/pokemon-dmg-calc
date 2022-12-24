@@ -25,9 +25,12 @@
   "title_move": "招式",
   "title_nature": "性格",
   "title_level": "等級",
+  "title_power": "招式威力",
+  "title_STAB": "屬修加成",
 
   "move_physical": "物理",
   "move_special": "特殊",
 
-  "placeholder_power": "威力"
+  "placeholder_power": "威力",
+  "placeholder_STAB": "屬修加成"
 }

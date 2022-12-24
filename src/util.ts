@@ -36,7 +36,7 @@ export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveS
     : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, getNatureFix(defender.nature, "D"))
 
   const base = (((((attacker.lv * 2 + 10) / 250) + atk / def) * move.power + 2) * attacker.lv) / 100
-  let typeBuffRate = attacker.types.includes(move.type) ? 1.5 : 1
+  let typeBuffRate = attacker.types.includes(move.type) ? (move.sameTypeAtkBonus||1.5) : 1
   let typeRate = getDamageRate(+move.type, +defender.types[0])
 
   if (defender.types[1] !== -1 && defender.types[0] !== defender.types[1]) {

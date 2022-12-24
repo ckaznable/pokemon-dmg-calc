@@ -25,9 +25,12 @@
   "title_move": "Move",
   "title_nature": "Nature",
   "title_level": "Level",
+  "title_power": "Power",
+  "title_STAB": "STAB",
 
   "move_physical": "Physical",
   "move_special": "Special",
 
-  "placeholder_power": "Power"
+  "placeholder_power": "Power",
+  "placeholder_STAB": "STAB"
 }
