@@ -18,7 +18,7 @@ function App() {
       <title>{ t("app_name") }</title>
     </Helmet>
 
-    <div className="container h-screen flex items-center justify-center px-10 mx-auto flex-col gap-20 py-8 overflow-auto">
+    <div className="container flex items-center justify-center px-10 mx-auto flex-col gap-20 py-8 overflow-auto">
       <div className="bg-green-400 w-[100%] h-[20px] relative">
         <div className="bg-red-500 h-[100%] text-white font-xl flex items-center justify-end pr-2" style={{width: `${dmg > 100 ? 100 : dmg}%`}}>{ dmg }%</div>
         <div className="bg-red-400 h-[100%] text-white font-xl flex items-center justify-end pr-2 absolute left-0 top-0 bottom-0" style={{ width: `${dmg * 0.85 > 100 ? 100 : dmg * 0.85}%` }}>{ Math.round(dmg * 0.85) }%</div>
