@@ -23,12 +23,12 @@ const useMove = create<Parameter>()(
     immer<Parameter>((set) => ({
       moveType: MoveType.Physical,
       setMoveType: (t: MoveType) => {set(state => {
-        state.moveType = t
+        state.moveType = +t
       })},
 
       power: 10,
       setPower: (t: number) => {set(state => {
-        state.power = t
+        state.power = +t
       })},
 
       type: PokemonType.Normal,
