@@ -1,5 +1,5 @@
 import { MoveType } from "@/types.d"
-import { isValidNumberString } from "@/util"
+import { isValidNumberString, onInputChange } from "@/util"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import TypeSelect from "./TypeSelect"
@@ -11,6 +11,8 @@ function MoveBox() {
     power, setPower,
     moveType, setMoveType,
     sameTypeAtkBonus, setSameTypeAtkBonus,
+    atkBonus, setAtkBonus,
+    defBonus, setDefBonus,
   } = useMove()
 
   const { t } = useTranslation()
@@ -40,12 +42,22 @@ function MoveBox() {
       <div className="gap-2 flex flex-col flex-wrap text-base from-neutral-700">
         <div className="gap-2 flex items-center">
           <span>{ t("title_power") }:</span>
-          <input type="number" min="0" placeholder={t("placeholder_power") as string} value={power || ""} onChange={onChangePower} />
+          <input type="number" min="0" placeholder={t("placeholder_power") as string} value={power || ""} onChange={onInputChange(setPower)} />
         </div>
 
         <div className="gap-2 flex items-center">
           <span>{ t("title_STAB") }:</span>
-          <input type="number" min="0" placeholder={t("placeholder_STAB") as string} value={sameTypeAtkBonus || ""} onChange={onChangeSTAB} />
+          <input type="number" min="0" placeholder={t("placeholder_STAB") as string} value={sameTypeAtkBonus || ""} onChange={onInputChange(setSameTypeAtkBonus)} />
+        </div>
+
+        <div className="gap-2 flex items-center">
+          <span>{t("title_atk_bonus")}:</span>
+          <input type="number" min="0" value={atkBonus || ""} onChange={onInputChange(setAtkBonus)} />
+        </div>
+
+        <div className="gap-2 flex items-center">
+          <span>{t("title_def_bonus")}:</span>
+          <input type="number" min="0" value={defBonus || ""} onChange={onInputChange(setDefBonus)} />
         </div>
 
         <div className="flex gap-2 items-center">

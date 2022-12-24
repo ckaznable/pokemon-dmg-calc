@@ -6,6 +6,8 @@ import { MoveType, PokemonType } from "@/types.d"
 
 export interface State {
   sameTypeAtkBonus: number
+  atkBonus: number
+  defBonus: number
   moveType: MoveType
   power: number
   type: PokemonType
@@ -13,6 +15,8 @@ export interface State {
 
 interface Action {
   setSameTypeAtkBonus: (t: number) => void
+  setAtkBonus: (t: number) => void
+  setDefBonus: (t: number) => void
   setMoveType: (t: MoveType) => void
   setPower: (t: number) => void
   setType: (t: PokemonType) => void
@@ -26,6 +30,16 @@ const useMove = create<Parameter>()(
       sameTypeAtkBonus: 1.5,
       setSameTypeAtkBonus: (t: number) => set(state => {
         state.sameTypeAtkBonus = t
+      }),
+
+      atkBonus: 1,
+      setAtkBonus: (t: number) => set(state => {
+        state.atkBonus = +t
+      }),
+
+      defBonus: 1,
+      setDefBonus: (t: number) => set(state => {
+        state.defBonus = +t
       }),
 
       moveType: MoveType.Physical,

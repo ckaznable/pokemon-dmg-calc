@@ -13,6 +13,17 @@ export function isValidNumberString (n: string): boolean {
   return true
 }
 
+export function onInputChange(setter: React.Dispatch<React.SetStateAction<number>>|((t: number)=>void)) {
+  return (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValidNumberString(e.target.value)) {
+      setter(0)
+      return
+    }
+
+    setter(+e.target.value)
+  }
+}
+
 export function calcStatus(ss: number, iv: number, level: number, bp: number, buffRate: number) {
   return Math.floor((((ss * 2) + iv + (bp / 4)) * level) / 100 + 5) * buffRate
 }
@@ -27,13 +38,15 @@ export function getNatureFix(n: [StatusExcludeH|-1, StatusExcludeH|-1], s: Statu
 }
 
 export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveState) {
-  const atk = move.moveType === MoveType.Physical
+  const atk = (move.moveType === MoveType.Physical
     ? calcStatus(attacker.ss.A, attacker.iv.A, attacker.lv, attacker.bp.A, getNatureFix(attacker.nature, "A"))
     : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, getNatureFix(attacker.nature, "C"))
+  ) * (move.atkBonus || 1)
 
-  const def = move.moveType === MoveType.Physical
+  const def = (move.moveType === MoveType.Physical
     ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, getNatureFix(defender.nature, "B"))
     : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, getNatureFix(defender.nature, "D"))
+  ) * (move.defBonus || 1)
 
   const base = (((((attacker.lv * 2 + 10) / 250) + atk / def) * move.power + 2) * attacker.lv) / 100
   let typeBuffRate = attacker.types.includes(move.type) ? (move.sameTypeAtkBonus||1.5) : 1

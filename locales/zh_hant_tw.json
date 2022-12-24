@@ -27,6 +27,8 @@
   "title_level": "等級",
   "title_power": "招式威力",
   "title_STAB": "屬修加成",
+  "title_atk_bonus": "攻擊方加成",
+  "title_def_bonus": "防守方加成",
 
   "move_physical": "物理",
   "move_special": "特殊",

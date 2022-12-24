@@ -1,5 +1,5 @@
 import React, { CSSProperties, useEffect, useState } from "react"
-import { calcHpStatus, calcStatus, isValidNumberString } from "../util"
+import { calcHpStatus, calcStatus, isValidNumberString, onInputChange } from "../util"
 
 export interface StatusInputDefault {
   bp: number
@@ -42,15 +42,6 @@ function StatusInput(props: Props) {
   useEffect(() => {
     props.onChangeIV?.(iv)
   }, [iv])
-
-  const onInputChange = (setter: React.Dispatch<React.SetStateAction<number>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(!isValidNumberString(e.target.value)) {
-      setter(0)
-      return
-    }
-
-    setter(+e.target.value)
-  }
 
   const inputStyle: CSSProperties = {
     maxWidth: `60px`

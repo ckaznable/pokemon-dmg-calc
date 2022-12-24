@@ -27,6 +27,8 @@
   "title_level": "Level",
   "title_power": "Power",
   "title_STAB": "STAB",
+  "title_atk_bonus": "Atk-bonus",
+  "title_def_bonus": "Def-bonus",
 
   "move_physical": "Physical",
   "move_special": "Special",
