@@ -14,11 +14,11 @@ export function isValidNumberString (n: string): boolean {
 }
 
 export function calcStatus(ss: number, iv: number, level: number, bp: number, buffRate: number) {
-  return Math.round((((ss * 2) + iv + (bp / 4)) * level) / 100 + 5 * buffRate)
+  return Math.floor((((ss * 2) + iv + (bp / 4)) * level) / 100 + 5) * buffRate
 }
 
 export function calcHpStatus(ss: number, iv: number, level: number, bp: number) {
-  return Math.round((((ss * 2) + iv + (bp / 4)) * level) / 100 + 10 + level)
+  return Math.floor((((ss * 2) + iv + (bp / 4)) * level) / 100 + 10 + level)
 }
 
 export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveState) {
