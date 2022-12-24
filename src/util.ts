@@ -1,4 +1,4 @@
-import { AllStatus, MoveType, PokemonType } from "./types.d"
+import { AllStatus, MoveType, PokemonType, StatusExcludeH } from "./types.d"
 import { State as MoveState } from "./hooks/useMove"
 
 export function isValidNumberString (n: string): boolean {
@@ -21,14 +21,19 @@ export function calcHpStatus(ss: number, iv: number, level: number, bp: number) 
   return Math.floor((((ss * 2) + iv + (bp / 4)) * level) / 100 + 10 + level)
 }
 
+export function getNatureFix(n: [StatusExcludeH|-1, StatusExcludeH|-1], s: StatusExcludeH) {
+  return n[0] === s ? 1.1 :
+    n[1] ? 0.9 : 1
+}
+
 export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveState) {
   const atk = move.moveType === MoveType.Physical
-    ? calcStatus(attacker.ss.A, attacker.iv.A, attacker.lv, attacker.bp.A, 1)
-    : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, 1)
+    ? calcStatus(attacker.ss.A, attacker.iv.A, attacker.lv, attacker.bp.A, getNatureFix(attacker.nature, "A"))
+    : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, getNatureFix(attacker.nature, "C"))
 
   const def = move.moveType === MoveType.Physical
-    ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, 1)
-    : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, 1)
+    ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, getNatureFix(defender.nature, "B"))
+    : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, getNatureFix(defender.nature, "D"))
 
   const base = (((((attacker.lv * 2 + 10) / 250) + atk / def) * move.power + 2) * attacker.lv) / 100
   let typeBuffRate = attacker.types.includes(move.type) ? 1.5 : 1

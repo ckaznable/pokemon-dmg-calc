@@ -1,3 +1,5 @@
+type StatusExcludeH = Omit<keyof Status, "H">
+
 export type Status = {
   H: number
   A: number
@@ -8,6 +10,7 @@ export type Status = {
 }
 
 export interface AllStatus {
+  nature: [StatusExcludeH|-1, StatusExcludeH|-1]
   types: PokemonTypes
   lv: number
   ss: Status

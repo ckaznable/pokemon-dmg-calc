@@ -34,6 +34,7 @@ function App() {
             iv: pms.setAttackerIV,
             ss: pms.setAttackerSS,
             types: pms.setAttackerTypes,
+            nature: pms.setAttackerNature,
           }}
         />
         <StatusBox
@@ -45,6 +46,7 @@ function App() {
             iv: pms.setDefenderIV,
             ss: pms.setDefenderSS,
             types: pms.setDefenderTypes,
+            nature: pms.setDefenderNature,
           }}
         />
       </div>

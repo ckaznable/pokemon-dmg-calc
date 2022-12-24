@@ -23,6 +23,8 @@
   "title_attacker": "Attacker",
   "title_defender": "Defender",
   "title_move": "Move",
+  "title_nature": "Nature",
+  "title_level": "Level",
 
   "move_physical": "Physical",
   "move_special": "Special",

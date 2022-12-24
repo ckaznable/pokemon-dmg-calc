@@ -13,12 +13,14 @@ interface State {
 
 interface Action {
   setAttackerTypes: (t: PokemonTypes) => void
+  setAttackerNature: (t: AllStatus["nature"]) => void
   setAttackerLV: (n: number) => void
   setAttackerSS: StatusSetter
   setAttackerIV: StatusSetter
   setAttackerBP: StatusSetter
 
   setDefenderTypes: (t: PokemonTypes) => void
+  setDefenderNature: (t: AllStatus["nature"]) => void
   setDefenderLV: (n: number) => void
   setDefenderSS: StatusSetter
   setDefenderIV: StatusSetter
@@ -41,6 +43,7 @@ function createDefStatus(def=0): Status {
 function createDefAllStatus(): AllStatus {
   return {
     types: [PokemonType.Normal, -1],
+    nature: [-1, -1],
     lv: 50,
     iv: createDefStatus(31),
     bp: createDefStatus(0),
@@ -54,6 +57,9 @@ const usePMStatus = create<Parameter>()(
       attacker: createDefAllStatus(),
       setAttackerTypes: (t: PokemonTypes) => set(state => {
         state.attacker.types = t
+      }),
+      setAttackerNature: (n: AllStatus["nature"]) => set(state => {
+        state.attacker.nature = n
       }),
       setAttackerLV: (n: number) => set(state => {
         state.attacker.lv = n
@@ -71,6 +77,9 @@ const usePMStatus = create<Parameter>()(
       defender: createDefAllStatus(),
       setDefenderTypes: (t: PokemonTypes) => set(state => {
         state.defender.types = t
+      }),
+      setDefenderNature: (n: AllStatus["nature"]) => set(state => {
+        state.defender.nature = n
       }),
       setDefenderLV: (n: number) => set(state => {
         state.defender.lv = n

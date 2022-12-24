@@ -23,6 +23,8 @@
   "title_attacker": "攻擊方",
   "title_defender": "防守方",
   "title_move": "招式",
+  "title_nature": "性格",
+  "title_level": "等級",
 
   "move_physical": "物理",
   "move_special": "特殊",
