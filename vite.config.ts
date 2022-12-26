@@ -17,6 +17,31 @@ export default defineConfig({
     VitePWA({
       devOptions: {
         enabled: true
+      },
+      includeAssets: ["fav.png", "icons/calculator-192_x_192.png"],
+      manifest: {
+        name: 'Simple Pokemon DMG Calc',
+        short_name: 'SP-DMG-C',
+        description: 'Simple Pokemon DMG Calc',
+        theme_color: '#121212',
+        icons: [
+          {
+            src: 'icons/calculator-192_x_192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'fav.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: 'fav.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
       }
     }),
   ],
