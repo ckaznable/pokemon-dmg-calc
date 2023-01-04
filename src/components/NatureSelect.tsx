@@ -1,7 +1,7 @@
 import { StatusExcludeH } from "@/types.d"
 import React from "react"
 
-interface Props { 
+interface Props {
   value: StatusExcludeH|-1
   onChange?: (v: StatusExcludeH|-1) => void
 }
@@ -14,7 +14,7 @@ function NatureSelect(props: Props) {
   }
 
   return (<>
-    <select onChange={onChange}>
+    <select value={props.value as string} onChange={onChange}>
       <Options />
     </select>
   </>)
