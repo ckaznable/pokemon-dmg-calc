@@ -1,5 +1,15 @@
 # Simple Pokemon Damage Calculator
 
-build from vite + ts + react + swc
+Powered by vite + ts + react + swc
 
 [Demo](https://ckaznable.github.io/pokemon-dmg-calc/ "Demo")
+
+# Build
+
+`yarn`
+
+`yarn build`
+
+# Development
+
+`yarn dev`
