@@ -16,6 +16,7 @@ export interface AllStatus {
   ss: Status
   iv: Status
   bp: Status
+  modifiers: Status
 }
 
 export type TYPE_NONE = -1

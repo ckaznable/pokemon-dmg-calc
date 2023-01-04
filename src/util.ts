@@ -39,13 +39,13 @@ export function getNatureFix(n: [StatusExcludeH|-1, StatusExcludeH|-1], s: Statu
 
 export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveState) {
   const atk = (move.moveType === MoveType.Physical
-    ? calcStatus(attacker.ss.A, attacker.iv.A, attacker.lv, attacker.bp.A, getNatureFix(attacker.nature, "A"))
-    : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, getNatureFix(attacker.nature, "C"))
+    ? calcStatus(attacker.ss.A, attacker.iv.A, attacker.lv, attacker.bp.A, getNatureFix(attacker.nature, "A")) * getModRate(attacker.modifiers.A)
+    : calcStatus(attacker.ss.C, attacker.iv.C, attacker.lv, attacker.bp.C, getNatureFix(attacker.nature, "C")) * getModRate(attacker.modifiers.C)
   ) * (move.atkBonus || 1)
 
   const def = (move.moveType === MoveType.Physical
-    ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, getNatureFix(defender.nature, "B"))
-    : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, getNatureFix(defender.nature, "D"))
+    ? calcStatus(defender.ss.B, defender.iv.B, defender.lv, defender.bp.B, getNatureFix(defender.nature, "B")) * getModRate(attacker.modifiers.B)
+    : calcStatus(defender.ss.D, defender.iv.D, defender.lv, defender.bp.D, getNatureFix(defender.nature, "D")) * getModRate(attacker.modifiers.D)
   ) * (move.defBonus || 1)
 
   const base = (((((attacker.lv * 2 + 10) / 250) + atk / def) * move.power + 2) * attacker.lv) / 100
@@ -58,6 +58,12 @@ export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveS
 
   const dmg = Math.round(base * typeBuffRate * typeRate)
   return Math.round((dmg / calcHpStatus(defender.ss.H, defender.iv.H, defender.lv, defender.bp.H)) * 100)
+}
+
+function getModRate(n: number) {
+  return n == 0 ? 1 :
+    n < 0 ? 2 / (2 + Math.abs(n)) :
+    (2 + n) / 2
 }
 
 function getDamageRate(atk: PokemonType, def: PokemonType) {
