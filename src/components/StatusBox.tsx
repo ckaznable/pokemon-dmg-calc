@@ -1,5 +1,4 @@
 import React from "react"
-import { useState } from "react"
 import { isValidNumberString } from "../util"
 import StatusInput, { StatusInputDefault } from "./StatusInput"
 
@@ -16,6 +15,7 @@ interface AllStatusSetter {
   bp: StatusSetter
   iv: StatusSetter
   ss: StatusSetter
+  mod: StatusSetter
 }
 
 interface Props {
@@ -37,6 +37,7 @@ function StatusBox(props: Props) {
   const onChangeSS = onChangeFactory("ss")
   const onChangeBP = onChangeFactory("bp")
   const onChangeIV = onChangeFactory("iv")
+  const onChangeMod = onChangeFactory("mod")
 
   const onChangeLV = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!isValidNumberString(e.target.value)) {
@@ -96,7 +97,20 @@ function StatusBox(props: Props) {
           <NatureSelect onChange={onChangeNature(1)} value={props.status.nature[1]} />
         </div>
 
-        {statusKeyList.map(k => <StatusInput key={k} hp={k == "H"} title={`${k}:`} value={getInputDef(k)} onChangeSS={onChangeSS(k)} onChangeIV={onChangeIV(k)} onChangeBP={onChangeBP(k)} level={props.status.lv} />)}
+        {statusKeyList.map(k => (
+          <StatusInput
+            key={k}
+            hp={k == "H"}
+            title={`${k}:`}
+            value={getInputDef(k)}
+            onChangeSS={onChangeSS(k)}
+            onChangeIV={onChangeIV(k)}
+            onChangeBP={onChangeBP(k)}
+            onChangeMod={onChangeMod(k)}
+            level={props.status.lv}
+            modifiers={props.status.modifiers[k]}
+          />)
+        )}
         <div className="mt-4 text-red-500">{remain}</div>
       </div>
     </fieldset>
