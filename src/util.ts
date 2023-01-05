@@ -60,7 +60,7 @@ export function calcDamage(attacker: AllStatus, defender: AllStatus, move: MoveS
   return Math.round((dmg / calcHpStatus(defender.ss.H, defender.iv.H, defender.lv, defender.bp.H)) * 100)
 }
 
-function getModRate(n: number) {
+export function getModRate(n: number) {
   return n == 0 ? 1 :
     n < 0 ? 2 / (2 + Math.abs(n)) :
     (2 + n) / 2

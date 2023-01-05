@@ -1,5 +1,5 @@
 import React, { CSSProperties, useEffect, useState } from "react"
-import { calcHpStatus, calcStatus, onInputChange } from "../util"
+import { calcHpStatus, calcStatus, getModRate, onInputChange } from "../util"
 import StatModifiersSelect from "./StatModifiersSelect"
 
 export interface StatusInputDefault {
@@ -33,7 +33,7 @@ function StatusInput(props: Props) {
 
   const status = props.hp
     ? calcHpStatus(ss, iv, props.level, bp)
-    : calcStatus(ss, iv, props.level, bp, buffRate)
+    : Math.round(calcStatus(ss, iv, props.level, bp, buffRate) * getModRate(mod))
 
   useEffect(() => {
     props.onChangeSS?.(ss)
