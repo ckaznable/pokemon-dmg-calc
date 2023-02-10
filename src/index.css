@@ -31,3 +31,12 @@ select {
 option {
   @apply text-white bg-[#121212] bg-opacity-80
 }
+
+#github-icon {
+  fill: #fff;
+  color: #333;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
